@@ -191,9 +191,13 @@ static class Program
                 string numStr = array[i, j].ToString();
                 int padding = maxLength - numStr.Length + 1;
                 string padded = new string(' ', padding) + numStr;
+                // background color
+                int rgbValue = (array[i, j] + 10) * 12;
+                // contrast color for foreground base on background color
+                int contrast = rgbValue < 128 ? 255 : 0;
                 Console.Write(padded
-                    .Pastel(Color.FromArgb(255, 0, 0))
-                    .PastelBg(Color.FromArgb((array[i, j] + 10) * 12, (array[i, j] + 10) * 12,(array[i, j] + 10) * 12))
+                    .Pastel(Color.FromArgb(contrast, contrast, contrast))
+                    .PastelBg(Color.FromArgb(rgbValue, 25, 25))
                     );
             }
             Console.Write(" ");
